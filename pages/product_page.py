@@ -2,6 +2,7 @@ from .base_page import BasePage
 from selenium.webdriver.common.by import By
 from .locators import ProductPageLocators
 import time
+from .locators import BasePageLocators
 
 
 class ProductPage(BasePage):
@@ -30,3 +31,11 @@ class ProductPage(BasePage):
 
         # # Проверяем, что находимся на странице с промо
         # assert "promo=newYear" in self.url, "'newYear' not in current url"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_SUCCESS), \
+            "Success message is presented, but should not be"
+
+    def should_be_disappeared_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_SUCCESS), \
+            "Success message is not disappeared, but should not be"
